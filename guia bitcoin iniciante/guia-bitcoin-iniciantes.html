@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Carteira Bitcoin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom right, #FF9900, #E53E3E);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+        }
+        .step-card {
+            cursor: pointer;
+            background-color: #1A202C;
+            color: white;
+            border-color: #2D3748;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .step-card-image {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #000;
+        }
+        .step-card-image .overlay {
+            background-color: rgba(0, 0, 0, 0.6);
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            border-radius: 1rem;
+        }
+        .step-card h2, .step-card p, .step-card li {
+            color: white;
+        }
+        .hidden {
+            display: none;
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: #1A202C;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            text-align: center;
+            position: relative;
+            max-width: 90%;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .step-content {
+            transition: all 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4">
+
+    <!-- Cabeçalho com imagem de fundo -->
+    <header id="main-header" class="step-card-image text-white w-full max-w-4xl rounded-3xl shadow-xl my-8" style="background-image: url('https://media.istockphoto.com/id/902887034/pt/foto/bitcoin.jpg?s=612x612&w=0&k=20&c=esFuKNVM1A_9PgTep8KZ1VSOR2Zyi06p5pr9zWvdDtk=');">
+        <div class="overlay p-8 sm:p-12 text-center flex-col">
+            <h1 class="text-3xl sm:text-4xl font-extrabold mb-4">Como Criar Sua Carteira de Bitcoin</h1>
+            <p class="text-sm sm:text-base text-gray-300 max-w-2xl mx-auto">
+                Um guia passo a passo simples e prático para começar a gerenciar seus Bitcoins com segurança.
+            </p>
+        </div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main class="p-6 sm:p-10 w-full max-w-4xl rounded-3xl shadow-xl my-8 bg-black/30">
+        <!-- Container principal com os passos, inicialmente visível -->
+        <div id="steps-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <!-- Passo 1 (com imagem de fundo) -->
+            <div class="p-0 rounded-2xl border-0 shadow-md transform transition-all duration-300 hover:scale-105 step-card step-card-image" style="background-image: url('https://images.unsplash.com/photo-1609554496796-c345a5335ceb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGJpdGNvaW58ZW58MHx8MHx8fDA%3D');" onclick="showStep(1)">
+                <div class="overlay flex-col">
+                    <span class="text-4xl">💡</span>
+                    <h2 class="text-xl font-bold mt-4 mb-2">A importância do Bitcoin</h2>
+                    <p class="text-gray-300 text-center">
+                        Entenda porque o bitcoin é tão importante
+                    </p>
+                </div>
+            </div>
+
+            <!-- Passo 2 (com imagem de fundo) -->
+            <div class="p-0 rounded-2xl border-0 shadow-md transform transition-all duration-300 hover:scale-105 step-card step-card-image" style="background-image: url('https://media.istockphoto.com/id/2224784032/pt/foto/digital-cryptocurrency-wallet-displaying-virtual-coins-with-neon-lines-on-a-dark-background.jpg?s=612x612&w=0&k=20&c=D8N9Hi8XnF13ZfpKVXNxFmZ0kqBcNLgcuOEUnwQHIfE=');" onclick="showStep(2)">
+                <div class="overlay flex-col">
+                    <span class="text-4xl">📚</span>
+                    <h2 class="text-xl font-bold mt-4 mb-2">Carteiras e Endereços</h2>
+                    <p class="text-gray-300 text-center">
+                        Minha carteira e meus endereços
+                    </p>
+                </div>
+            </div>
+
+            <!-- Passo 3 (com imagem de fundo) -->
+            <div class="p-0 rounded-2xl border-0 shadow-md transform transition-all duration-300 hover:scale-105 step-card step-card-image" style="background-image: url('https://media.istockphoto.com/id/1313523467/pt/foto/global-blockchain-background.jpg?s=612x612&w=0&k=20&c=DxPFbnXmO5q4-0dE4EHfrNwv_5pKaRD82oBAVdCT8ZA=');" onclick="showStep(3)">
+                <div class="overlay flex-col">
+                    <span class="text-4xl">📱</span>
+                    <h2 class="text-xl font-bold mt-4 mb-2">Chave Pública e Privada</h2>
+                    <p class="text-gray-300 text-center">
+                        Como receber e usar
+                    </p>
+                </div>
+            </div>
+
+            <!-- Passo 4 (com imagem de fundo) -->
+            <div class="p-0 rounded-2xl border-0 shadow-md transform transition-all duration-300 hover:scale-110 step-card step-card-image" style="background-image: url('https://images.unsplash.com/photo-1518483239595-6f1f9e80b7c7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTB8fGJpdGNvaW4lMjBzZW5oYXN8ZW58MHx8MHx8fDA%3D');" onclick="showStep(4)">
+                <div class="overlay flex-col">
+                    <span class="text-4xl">🔑</span>
+                    <h2 class="text-xl font-bold mt-4 mb-2">As 12 Palavras</h2>
+                    <p class="text-gray-300 text-center">
+                        Sua chave mestra e como protegê-la.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Passo 5 (com imagem de fundo) -->
+            <div class="p-0 rounded-2xl border-0 shadow-md transform transition-all duration-300 hover:scale-105 step-card step-card-image" style="background-image: url('https://images.pexels.com/photos/844124/pexels-photo-844124.jpeg?auto=compress&cs=tinysrgb&w=600');" onclick="showStep(5)">
+                <div class="overlay flex-col">
+                    <span class="text-4xl">⚖️</span>
+                    <h2 class="text-xl font-bold mt-4 mb-2">Bitcoin VS Fiats</h2>
+                    <p class="text-gray-300 text-center">
+                        bitcoin contra as outras moedas do mundo
+                    </p>
+                </div>
+            </div>
+
+            <!-- Passo 6 (com imagem de fundo) -->
+            <div class="p-0 rounded-2xl border-0 shadow-md transform transition-all duration-300 hover:scale-105 step-card step-card-image" style="background-image: url('https://media.istockphoto.com/id/2194993582/pt/foto/online-and-offline-concept-of-accessibility-in-business-red-wooden-cubes-change-the-word.jpg?s=612x612&w=0&k=20&c=hrOlwtjywDlH_66fI3tpPX45g17VUE12EYrLiXv3Z1M=');" onclick="showStep(6)">
+                <div class="overlay flex-col">
+                    <span class="text-4xl">➡️</span>
+                    <h2 class="text-xl font-bold mt-4 mb-2">Carteira offline</h2>
+                    <p class="text-gray-300 text-center">
+                        aprenda a fazer a sua carteira de forma 100% offline e segura
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteúdo para cada passo, inicialmente escondido -->
+        <div id="step-1" class="step-content step-card-image hidden w-full max-w-4xl rounded-3xl shadow-xl my-8" style="background-image: url('https://media.istockphoto.com/id/1217038043/pt/foto/bitcoin-hold-concept-cryptocurrency-stored-in-the-ground-saving-symbol.jpg?s=612x612&w=0&k=20&c=75Rz5PvKHukFYA2-Bo5YnlVEYLt6oTFUmD0ZI9YXklA=');">
+            <div class="overlay p-6 sm:p-10 text-white flex-col text-left">
+                <button onclick="goBack()" class="mb-4 text-blue-400 font-semibold">&larr; Voltar</button>
+                <h2 class="text-2xl font-bold text-gray-100 mb-4">1. A IMPORTÂNCIA DO BITCOIN E SUA INFLAÇÃO</h2>
+                <p class="text-gray-300">
+                    O Bitcoin funciona com uma tecnologia chamada **blockchain**, que é como um livro-razão público. Sua carteira não guarda as moedas, mas sim um par de chaves criptográficas. O Bitcoin é a primeira moeda descentralizada, não possui dono. Seu criador, Satoshi Nakamoto, é um mistério até hoje. Ninguém sabe seu paradeiro, se é uma pessoa ou grupo. O fato é que Satoshi nunca se beneficiou de sua invenção, sua carteira que possui mais de bilhões de dólares, nunca sequer moveu um centavo. Satoshi renunciou a bilhões de dólares, diplomas, apertos de mão, Prêmio Nobel, reconhecimento e inúmeras outras coisas. Isso faz o Bitcoin se destacar das demais criptomoedas e do dinheiro fiat. O Bitcoin é o primeiro ativo da humanidade que o indivíduo tem total controle sobre seu dinheiro.
+                </p>
+                <br>
+                <p class="text-gray-300">
+                    A principal diferença entre o Bitcoin e as moedas tradicionais (como o dólar ou o real) é a sua natureza de oferta. Enquanto os governos e bancos centrais podem imprimir mais dinheiro, aumentando a oferta e causando inflação, o Bitcoin possui uma política monetária fixa e imutável. Sua oferta máxima é limitada a **21 milhões de unidades**, um fato que é garantido por código. Essa escassez programada é o que o torna um ativo deflacionário. Novas moedas são criadas a cada 10 minutos por meio do processo de mineração, mas a quantidade de moedas novas é reduzida pela metade aproximadamente a cada quatro anos em um evento conhecido como **halving**. Esse processo desacelera a taxa de emissão de novas moedas, tornando o Bitcoin progressivamente mais escasso com o tempo. Isso contrasta diretamente com a inflação das moedas fiduciárias, que podem perder poder de compra ao longo do tempo. A previsibilidade da oferta do Bitcoin o torna uma forte reserva de valor.
+                </p>
+            </div>
+        </div>
+
+        <div id="step-2" class="step-content step-card-image hidden w-full max-w-4xl rounded-3xl shadow-xl my-8" style="background-image: url('https://media.istockphoto.com/id/2224784032/pt/foto/digital-cryptocurrency-wallet-displaying-virtual-coins-with-neon-lines-on-a-dark-background.jpg?s=612x612&w=0&k=20&c=D8N9Hi8XnF13ZfpKVXNxFmZ0kqBcNLgcuOEUnwQHIfE=');">
+            <div class="overlay p-6 sm:p-10 text-white flex-col text-left">
+                <button onclick="goBack()" class="mb-4 text-blue-400 font-semibold">&larr; Voltar</button>
+                <h2 class="text-2xl font-bold text-gray-100 mb-4">2. Carteiras e Endereços</h2>
+                <p class="text-gray-300">
+                    A sua carteira de Bitcoin não é como uma carteira de couro que guarda notas e moedas. Na verdade, ela é um software ou hardware que armazena suas chaves criptográficas. Pense nela como um gerenciador de chaves que permite que você acesse e interaja com seus Bitcoins na blockchain.
+                </p>
+                <br>
+                <p class="text-gray-300">
+                    Essas chaves são um par: a **chave pública** e a **chave privada**. A chave pública é o seu endereço, que você pode compartilhar para que outras pessoas enviem Bitcoins para você. Já a **chave privada** é a senha secreta que dá a você o controle total sobre seus fundos. A segurança da sua carteira depende inteiramente da proteção dessa chave privada.
+                </p>
+                <br>
+                <p class="text-gray-300">
+                    Existem diferentes tipos de carteiras, e a escolha ideal depende do seu perfil de uso e da quantidade de Bitcoins que você deseja armazenar.
+                    <ul class="list-disc list-inside mt-4 space-y-2">
+                        <li>A carteira da BLUEWALLET é a mais segura. Sendo gerada de forma offline, ela passa a ser imune a hacker e qualquer tipo de violação do seu aparelho. Elas são fáceis de fazer e impossíveis ,até então, de serem invadidas. Veremos mais adiante sobre isso.</li>
+                        <li>**Carteiras de Papel:** São as chaves impressas em papel. Embora sejam "frias" e imunes a ataques online, elas são frágeis e facilmente danificadas ou perdidas. Não são recomendadas para iniciantes.</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+
+        <div id="step-3" class="step-content step-card-image hidden w-full max-w-4xl rounded-3xl shadow-xl my-8" style="background-image: url('https://media.istockphoto.com/id/1313523467/pt/foto/global-blockchain-background.jpg?s=612x612&w=0&k=20&c=DxPFbnXmO5q4-0dE4EHfrNwv_5pKaRD82oBAVdCT8ZA=');">
+            <div class="overlay p-6 sm:p-10 text-white flex-col text-left">
+                <button onclick="goBack()" class="mb-4 text-blue-400 font-semibold">&larr; Voltar</button>
+                <h2 class="text-2xl font-bold text-gray-100 mb-4">3. Chave Pública e Chave Privada</h2>
+                <p class="text-gray-300">
+                    No universo do Bitcoin, a chave pública e a chave privada são o cerne da segurança. Elas formam um par criptográfico que garante a posse e a transferência de seus fundos. Pense nelas como a combinação de um cofre e sua chave única.
+                </p>
+                <br>
+                <p class="text-gray-300">
+                    A **chave pública** pode ser comparada ao seu endereço de e-mail ou número de conta bancária. É um endereço que você pode compartilhar livremente com qualquer pessoa para que ela envie Bitcoins para você. A partir da chave pública, sua carteira gera um endereço de recebimento, que é a sequência de letras e números que você copia e cola para receber fundos.
+                </p>
+                <br>
+                <p class="text-gray-300">
+                    A **chave privada**, por outro lado, é a parte mais importante e mais sensível do sistema. Ela é uma senha secreta, uma longa string de caracteres, que concede a você o controle total sobre seus Bitcoins. É com ela que você "assina" as transações, provando que é o dono dos fundos. A segurança da sua carteira depende exclusivamente da proteção da sua chave privada. Se você perdê-la ou se ela for roubada, você perde o acesso aos seus Bitcoins para sempre.
+                </p>
+                <br>
+                <p class="text-gray-300">
+                    A mágica da criptografia está no fato de que, embora a chave pública seja matematicamente derivada da chave privada, é virtualmente impossível fazer o caminho inverso: descobrir a chave privada a partir da pública. Isso significa que você pode compartilhar seu endereço de recebimento sem medo, mas deve proteger sua chave privada como a sua posse mais valiosa.
+                </p>
+            </div>
+        </div>
+
+        <div id="step-4" class="step-content step-card-image hidden w-full max-w-4xl rounded-3xl shadow-xl my-8" style="background-image: url('https://images.unsplash.com/photo-1518483239595-6f1f9e80b7c7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTB8fGJpdGNvaW4lMjBzZW5oYXN8ZW58MHx8MHx8fDA%3D');">
+            <div class="overlay p-6 sm:p-10 text-white flex-col text-left">
+                <button onclick="goBack()" class="mb-4 text-blue-400 font-semibold">&larr; Voltar</button>
+                <h2 class="text-2xl font-bold text-gray-100 mb-4">4. Suas 12 Palavras: A Chave Mestra</h2>
+                <p class="text-gray-300">
+                    As suas 12 palavras (ou frase de recuperação) são a chave para acessar todos os seus endereços de Bitcoin. Elas são geradas de forma aleatória pela sua carteira.
+                </p>
+                <br>
+                <h3 class="text-xl font-semibold text-gray-200 mb-2">Exemplo de Palavras:</h3>
+                <code class="block bg-gray-900/70 p-4 rounded-lg text-sm font-mono tracking-wider">
+                    1-GOAT 2-CAT 3-CAR 4-GOOD 5-DOOR 6-TREE 7-GUN 8-BAN 9-LOVE 10-BAD 11-GREAT 12-BOOL
+                </code>
+                <br>
+                <p class="text-gray-300">
+                    Juntando essas 12 palavras com uma senha adicional (chamada de passphrase ou 13ª palavra), você tem acesso às suas chaves privadas. É por isso que você deve guardá-las de forma totalmente segura. A melhor prática é anotá-las em um meio físico, como papel ou placas de metal.
+                </p>
+                <br>
+                <h3 class="text-xl font-semibold text-gray-200 mb-2">Estratégia de Segurança Avançada:</h3>
+                <p class="text-gray-300">
+                    A divisão das palavras é uma escolha para aumentar a segurança. Você pode guardar as partes em locais diferentes.
+                </p>
+                <div class="bg-gray-900/70 p-4 rounded-lg mt-2">
+                    <p class="font-mono text-sm"><strong>Parte 1:</strong> {1-goat, 2-cat, 3-car, 4-good, 5-door, 6-tree}</p>
+                    <p class="font-mono text-sm"><strong>Parte 2:</strong> {7-ban, 8-gun, 9-love, 10-bad, 11-great, 12-bool}</p>
+                    <p class="font-mono text-sm mt-2"><strong>Você guarda:</strong> {A senha na sua mente}</p>
+                </div>
+                <br>
+                <p class="text-gray-300">
+                    Ao dividir as palavras e manter a senha apenas na sua cabeça, você cria uma camada extra de segurança. Mesmo que alguém encontre todas as 12 palavras, ainda precisará da sua senha para acessar as chaves privadas.
+                    <br><br>
+                    Para memorizar a senha, use coisas que você lembraria facilmente (nome do primeiro cachorro, número de telefone da avó, número da primeira casa que morou, etc.). Assim, também seria mais fácil deixar dicas para seus herdeiros saberem a senha no futuro.
+                </p>
+            </div>
+        </div>
+
+        <div id="step-5" class="step-content step-card-image hidden w-full max-w-4xl rounded-3xl shadow-xl my-8" style="background-image: url('https://images.pexels.com/photos/844124/pexels-photo-844124.jpeg?auto=compress&cs=tinysrgb&w=600');">
+            <div class="overlay p-6 sm:p-10 text-white flex-col text-left">
+                <button onclick="goBack()" class="mb-4 text-blue-400 font-semibold">&larr; Voltar</button>
+                <h2 class="text-2xl font-bold text-gray-100 mb-4">5. Bitcoin vs. Moedas Fiat: A Batalha pela Soberania</h2>
+                <p class="text-gray-300">
+                    As moedas "fiat" (como o Real ou o Dólar) são criadas por governos que têm domínio sobre elas. Diferente do Bitcoin, as moedas fiat ficam sob o controle quase total do estado.
+                </p>
+                <br>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+                    <div class="bg-gray-900/70 p-4 rounded-lg">
+                        <h3 class="text-xl font-bold text-green-400 mb-2">BITCOIN (B)</h3>
+                        <ul class="text-left space-y-2">
+                            <li><strong>Decentralizado:</strong> Ninguém controla a rede.</li>
+                            <li><strong>Deflacionário:</strong> Oferta limitada e previsível.</li>
+                            <li><strong>21 Milhões de Unidades:</strong> Escassez garantida por código.</li>
+                            <li><strong>Fácil Transporte:</strong> Bilhões em um pendrive.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-900/70 p-4 rounded-lg">
+                        <h3 class="text-xl font-bold text-red-400 mb-2">MOEDA FIAT ($)</h3>
+                        <ul class="text-left space-y-2">
+                            <li><strong>Centralizado:</strong> Controlado por governos e bancos.</li>
+                            <li><strong>Inflacionário:</strong> Podem imprimir sem limites.</li>
+                            <li><strong>Unidades Infinitas:</strong> Perde valor com o tempo.</li>
+                            <li><strong>Difícil Transporte:</strong> Restrições para grandes valores.</li>
+                        </ul>
+                    </div>
+                </div>
+                <br>
+                <p class="text-gray-300">
+                    Um exemplo de que as moedas fiat não são confiáveis é o controle do estado. O governo pode bloquear, imprimir, apagar e rastrear o dinheiro.
+                </p>
+                <br>
+                <h3 class="text-xl font-semibold text-gray-200 mb-2">O Futuro do Controle: CBDCs e o DREX</h3>
+                <p class="text-gray-300">
+                    O estado não tem controle total ainda, mas sua nova CBDC (Moeda Digital do Banco Central), inspirada na ditadura chinesa, deve dar total controle sobre o dinheiro. O DREX, a nova moeda do governo, pode fazer com que o estado consiga:
+                </p>
+                <ul class="list-disc list-inside mt-4 space-y-2 bg-gray-900/70 p-4 rounded-lg">
+                    <li>Apagar saldos em contas</li>
+                    <li>Bloquear saldos</li>
+                    <li>Data de expiração de saldos</li>
+                    <li>Controle de onde e com o que gastar</li>
+                    <li>Imposto e multas automáticas</li>
+                    <li>Rastreamento total</li>
+                </ul>
+                <br>
+                <p class="text-gray-300 font-bold">
+                    Com o DREX, o governo passa a ter total controle do seu dinheiro, dificultando a compra de BITCOIN. A única forma de fugir é comprando Bitcoin.
+                </p>
+            </div>
+        </div>
+
+        <div id="step-6" class="step-content step-card-image hidden w-full max-w-4xl rounded-3xl shadow-xl my-8" style="background-image: url('https://media.istockphoto.com/id/2194993582/pt/foto/online-and-offline-concept-of-accessibility-in-business-red-wooden-cubes-change-the-word.jpg?s=612x612&w=0&k=20&c=hrOlwtjywDlH_66fI3tpPX45g17VUE12EYrLiXv3Z1M=');">
+            <div class="overlay p-6 sm:p-10 text-white flex-col text-left">
+                <button onclick="goBack()" class="mb-4 text-blue-400 font-semibold">&larr; Voltar</button>
+                <h2 class="text-2xl font-bold text-gray-100 mb-4">6. Crie sua Carteira Fria (Offline)</h2>
+                <p class="text-gray-300 mb-6">
+                    Uma carteira fria (ou offline) é a forma mais segura de guardar seus Bitcoins, pois suas chaves privadas nunca são expostas à internet. Assista ao vídeo abaixo para um guia completo.
+                </p>
+
+                <!-- YouTube Embed -->
+                <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg border-2 border-gray-700 mb-6">
+                    <iframe src="https://www.youtube.com/embed/Va42n_wprWA?si=HZ3Aoqchhthly-po" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="w-full h-full"></iframe>
+                </div>
+
+                <div class="bg-gray-900/70 p-4 rounded-lg">
+                     <h3 class="text-xl font-semibold text-gray-200 mb-2">Por que usar uma Carteira Fria?</h3>
+                     <ul class="list-disc list-inside space-y-2 text-gray-300">
+                        <li><strong>Segurança Máxima:</strong> Suas chaves privadas ficam 100% offline, imunes a hackers e malwares.</li>
+                        <li><strong>Soberania Total:</strong> Você é o único com acesso e controle sobre seus fundos.</li>
+                        <li><strong>Paz de Espírito:</strong> Durma tranquilo sabendo que seus Bitcoins estão protegidos.</li>
+                     </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Aviso de Segurança com fundo vermelho sólido -->
+        <div id="security-warning" class="mt-8 p-6 rounded-2xl border-2 border-red-200 text-center bg-red-900 text-white">
+            <p class="font-bold">⚠️ Aviso de Segurança:</p>
+            <p class="text-sm mt-2">A segurança de seus fundos depende inteiramente do cuidado com sua frase de recuperação. Se perdê-la ou se for roubada, você perderá seus Bitcoins para sempre. O conhecimento é a sua maior proteção.</p>
+        </div>
+    </main>
+    
+    <!-- Botão de Doação -->
+    <button id="donateButton" class="fixed bottom-4 left-4 p-2 bg-gray-700 text-white rounded-full shadow-lg cursor-pointer hover:scale-110 transition-transform">
+        <span class="text-3xl">💸</span>
+    </button>
+
+    <!-- Ícone de Menção Honrosa -->
+    <button id="honorableMentionButton" class="fixed bottom-4 right-4 p-2 bg-yellow-500 text-white rounded-full shadow-lg cursor-pointer hover:scale-110 transition-transform">
+        <span class="text-3xl">🏆</span>
+    </button>
+
+    <!-- Modal de Doação -->
+    <div id="donateModal" class="modal hidden">
+        <div class="modal-content">
+            <button onclick="hideDonateModal()" class="absolute top-2 right-4 text-white text-3xl font-bold">&times;</button>
+            <h3 class="text-2xl font-bold mb-2">Agradecemos sua doação!</h3>
+            <p class="text-gray-300">Se isso te ajudou e quiser contribuir com qualquer quantia de bitcoin envie para esse endereço</p>
+            <div id="qrcode" class="my-4">
+                <!-- QR Code será gerado aqui -->
+            </div>
+            <p id="btcAddress" class="break-all text-sm font-mono bg-gray-700 p-2 rounded-md cursor-pointer">
+                bc1qnakjg9ejx65x3sk3x03nswtrarg7s3p7qy37k9
+            </p>
+            <div onclick="copyToClipboard()" class="mt-2 text-sm text-blue-400 cursor-pointer hover:underline">
+                Copiar endereço
+            </div>
+        </div>
+    </div>
+    <!-- Modal de Menção Honrosa (Inicialmente escondido) -->
+    <div id="honorableMentionModal" class="modal hidden">
+        <div class="modal-content">
+            <button onclick="hideHonorableMention()" class="absolute top-2 right-4 text-white text-3xl font-bold">&times;</button>
+            <h3 class="text-2xl font-bold mb-2">Menção Honrosa</h3>
+            <p class="text-gray-300">Agradecemos as pessoas que nos alertaram sobre a importancia o bitcoin. um agradecimento ao Super Xandao(@superxandao), Renato Trezoitao (@r38tao), Satoshi Nakamoto e toda a comunidade Bitcoin. AÇO! ass:zero4 </p>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="text-center p-4 text-gray-500 text-sm w-full max-w-4xl">
+        <p>&copy; 2025 Guia de Carteira Bitcoin. Todos os direitos reservados.</p>
+        <div class="mt-2 text-gray-400 flex justify-center items-center">
+            Siga-nos: 
+            <a href="https://x.com/B0inaPreta" target="_blank" class="text-white hover:text-gray-200 mx-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.901 1.153h3.689l-8.04 9.191l9.143 12.062h-7.618l-5.613-7.583l-6.32 7.583h-3.69l8.474-9.689l-8.629-11.411h7.728l4.897 6.608l5.804-6.608zm-2.071 18.91l6.191-8.358h-2.973l-5.186 7.025h2.968z"/>
+                </svg>
+                <span class="ml-1 text-blue-300 hover:text-blue-100">@B0inaPreta</span>
+            </a>
+            |
+            <a href="https://instagram.com/beuno404" target="_blank" class="text-white hover:text-gray-200 mx-2 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07l.544.027a2.532 2.532 0 0 1 1.77 1.77l.027.545c.058 1.266.07 1.646.07 4.85v.001c0 3.204-.012 3.584-.07 4.85l-.027.544a2.532 2.532 0 0 1-1.77 1.77l-.545.027c-1.266.058-1.646.07-4.85.07h-.001c-3.204 0-3.584-.012-4.85-.07l-.544-.027a2.532 2.532 0 0 1-1.77-1.77l-.027-.545c-.058-1.266-.07-1.646-.07-4.85v-.001c0-3.204.012-3.584.07-4.85l.027-.544a2.532 2.532 0 0 1 1.77-1.77l.545-.027c1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072l-1.096.052a4.673 4.673 0 0 0-3.28 3.28l-.052 1.096c-.058 1.28-.072 1.688-.072 4.947v.001c0 3.259.014 3.667.072 4.947l.052 1.096a4.673 4.673 0 0 0 3.28 3.28l1.096.052c1.28.058 1.688.072 4.947.072h.001c3.259 0 3.667-.014 4.947-.072l1.096-.052a4.673 4.673 0 0 0 3.28-3.28l.052-1.096c.058-1.28.072-1.688.072-4.947v-.001c0-3.259-.014-3.667-.072-4.947l-.052-1.096a4.673 4.673 0 0 0-3.28-3.28l-1.096-.052c-1.28-.058-1.688-.072-4.947-.072zM12 6.865a5.135 5.135 0 1 0 0 10.271a5.135 5.135 0 0 0 0-10.271zm0 8.271a3.136 3.136 0 1 1 0-6.271a3.136 3.136 0 0 1 0 6.271zm6.271-8.868a1.2 1.2 0 1 0 0 2.4a1.2 1.2 0 0 0 0-2.4z"/>
+                </svg>
+                <span class="ml-1 text-blue-300 hover:text-blue-100">@beuno404</span>
+            </a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.js"></script>
+    <script>
+        function showStep(stepNumber) {
+            document.getElementById('steps-container').classList.add('hidden');
+            const securityWarning = document.getElementById('security-warning');
+            if (securityWarning) {
+                securityWarning.classList.add('hidden');
+            }
+            document.getElementById('main-header').classList.add('hidden');
+            const stepElement = document.getElementById('step-' + stepNumber);
+            if (stepElement) {
+                stepElement.classList.remove('hidden');
+            } else {
+                console.error("Erro: O elemento com o ID 'step-" + stepNumber + "' não foi encontrado.");
+            }
+        }
+
+        function goBack() {
+            document.getElementById('steps-container').classList.remove('hidden');
+            const securityWarning = document.getElementById('security-warning');
+            if (securityWarning) {
+                securityWarning.classList.remove('hidden');
+            }
+            document.getElementById('main-header').classList.remove('hidden');
+            for (let i = 1; i <= 6; i++) {
+                const stepElement = document.getElementById('step-' + i);
+                if (stepElement) {
+                    stepElement.classList.add('hidden');
+                }
+            }
+        }
+
+        const donateButton = document.getElementById('donateButton');
+        const donateModal = document.getElementById('donateModal');
+        const honorableMentionButton = document.getElementById('honorableMentionButton');
+        const honorableMentionModal = document.getElementById('honorableMentionModal');
+        const bitcoinAddress = 'bc1qnakjg9ejx65x3sk3x03nswtrarg7s3p7qy37k9';
+
+        donateButton.addEventListener('click', () => {
+            const qrCodeElement = document.getElementById('qrcode');
+            qrCodeElement.innerHTML = '';
+
+            const typeNumber = 4;
+            const errorCorrectionLevel = 'L';
+            const qr = qrcode(typeNumber, errorCorrectionLevel);
+            qr.addData(bitcoinAddress);
+            qr.make();
+            qrCodeElement.innerHTML = qr.createImgTag(4, 8, 'margin: 0 auto;');
+            
+            donateModal.classList.remove('hidden');
+        });
+
+        honorableMentionButton.addEventListener('click', () => {
+            honorableMentionModal.classList.remove('hidden');
+        });
+
+        function hideDonateModal() {
+            donateModal.classList.add('hidden');
+        }
+
+        function hideHonorableMention() {
+            honorableMentionModal.classList.add('hidden');
+        }
+
+        function copyToClipboard() {
+            const address = document.getElementById('btcAddress').textContent;
+            navigator.clipboard.writeText(address).then(() => {
+                // Notificações em modais, pois `alert()` é restrito.
+            }).catch(err => {
+                console.error('Falha ao copiar: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
